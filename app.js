@@ -70,7 +70,7 @@ function isoToday() {
 }
 
 function teamName(teamId) {
-  return TEAMS?.[teamId]?.name || (teamId === "azul" ? "Time Azul" : "Time Verde");
+  return TEAMS?.[teamId]?.name || (teamId === "azul" ? "França" : "Brasil");
 }
 
 function teamAccent(teamId) {
@@ -660,69 +660,60 @@ function buildStickerCard(vendor, index, options = {}) {
   const showManagerActions = !!options.showManagerActions && session.role === "manager";
   const photo = vendor.imageUrl
     ? `<img src="${escapeHtml(vendor.imageUrl)}" crossorigin="anonymous" loading="lazy" referrerpolicy="no-referrer" alt="${escapeHtml(vendor.name)}" />`
-    : `<div class="saulo-sticker-placeholder">📸</div>`;
+    : `<div class="premium-card-photo-placeholder">📸</div>`;
 
   const fullName = String(vendor.name || "Vendedor").trim().toUpperCase();
   const displayName = String(vendor.name || "Vendedor").trim();
-  const position = String(vendor.position || vendor.role || vendor.title || "Vendedor").trim();
+  const position = String(vendor.position || "Vendedor").trim();
   const height = String(vendor.height || "1,70m").trim();
   const weight = String(vendor.weight || "70kg").trim();
   const birthDate = String(vendor.birthDate || vendor.nascimento || "").trim();
   const age = String(vendor.age || "").trim();
-  const birthLabel = birthDate ? "Nascimento" : "Idade";
-  const birthValue = birthDate || age || "A definir";
-  const editionText = `${team === "verde" ? "Verde" : "Azul"} • ${rarity.shortLabel || rarity.label}`;
-  const initials = (team === "verde" ? "SV" : "SA");
+  const birthLabel = birthDate && birthDate !== 'A definir' ? 'NASC.' : 'IDADE';
+  const birthValue = birthDate && birthDate !== 'A definir' ? birthDate : (age || '18');
+  const editionText = `${teamLabel} • ${rarity.label}`;
 
   return `
-    <article class="sticker-premium saulo-sticker ${team} rarity-${rarity.key} ${compact ? "compact" : ""}" data-sticker-vendor="${escapeHtml(vendor.id)}">
-      <div class="sticker-premium-frame saulo-sticker-frame">
-        <div class="saulo-holo-layer"></div>
-        <div class="saulo-stadium-light"></div>
+    <article class="sticker-premium soccer-premium-card ${team} rarity-${rarity.key} ${compact ? "compact" : ""}" data-sticker-vendor="${escapeHtml(vendor.id)}">
+      <div class="sticker-premium-frame soccer-premium-frame">
+        <div class="soccer-holo"></div>
+        <div class="soccer-card-edge"></div>
+        <div class="soccer-crowd"></div>
 
-        <div class="saulo-brand-badge">
-          <span class="saulo-brand-symbol">★</span>
-          <span>Copa das Vendas<br>2026</span>
+        <div class="soccer-event-badge">
+          <div class="soccer-event-mark">★</div>
+          <div class="soccer-event-copy">COPA DAS<br>VENDAS<br>2026</div>
         </div>
 
-        <div class="saulo-team-badge">
-          <div class="saulo-team-flag"><i></i></div>
-          <strong>${escapeHtml(teamLabel)}</strong>
-          <em>${escapeHtml(initials)}</em>
+        <div class="soccer-team-badge ${team}">
+          <div class="soccer-team-badge-shape"></div>
+          <small>${escapeHtml(teamLabel.toUpperCase())}</small>
         </div>
 
-        <div class="saulo-left-stats">
-          <div class="saulo-stat-box">
-            <span class="saulo-stat-icon">▦</span>
-            <small>${escapeHtml(birthLabel)}</small>
-            <strong>${escapeHtml(birthValue)}</strong>
+        <div class="soccer-team-watermark">${escapeHtml(teamLabel.toUpperCase())}</div>
+
+        <div class="soccer-photo-shell">
+          <div class="soccer-photo-bg"></div>
+          <div class="soccer-photo">${photo}</div>
+        </div>
+
+        <div class="soccer-side-stats">
+          <div class="soccer-side-stat"><small>${escapeHtml(birthLabel)}</small><strong>${escapeHtml(birthValue)}</strong></div>
+          <div class="soccer-side-stat"><small>ALTURA</small><strong>${escapeHtml(height)}</strong></div>
+          <div class="soccer-side-stat"><small>PESO</small><strong>${escapeHtml(weight)}</strong></div>
+        </div>
+
+        <div class="soccer-center-badge">${escapeHtml((vendor.shortName || vendor.name || 'SV').slice(0,2).toUpperCase())}</div>
+
+        <div class="soccer-bottom-panel">
+          <div class="soccer-bottom-top">
+            <div class="soccer-emblem left">⚽</div>
+            <div class="soccer-name-box"><div class="soccer-name">${escapeHtml(fullName)}</div></div>
+            <div class="soccer-emblem right">🏆</div>
           </div>
-          <div class="saulo-stat-box">
-            <span class="saulo-stat-icon">↕</span>
-            <small>Altura</small>
-            <strong>${escapeHtml(height)}</strong>
-          </div>
-          <div class="saulo-stat-box">
-            <span class="saulo-stat-icon">◉</span>
-            <small>Peso</small>
-            <strong>${escapeHtml(weight)}</strong>
-          </div>
+          <div class="soccer-role-bar">${escapeHtml(position.toUpperCase())}</div>
+          <div class="soccer-card-code">#${stickerNumber} • ${escapeHtml(editionText)}</div>
         </div>
-
-        <div class="saulo-photo-area">${photo}</div>
-
-        <div class="saulo-confetti c1"></div>
-        <div class="saulo-confetti c2"></div>
-        <div class="saulo-confetti c3"></div>
-
-        <div class="saulo-name-plate">
-          <span class="saulo-ball-badge">⚽</span>
-          <strong>${escapeHtml(fullName)}</strong>
-          <span class="saulo-cup-badge">🏆</span>
-        </div>
-
-        <div class="saulo-position-bar">${escapeHtml(position.toUpperCase())}</div>
-        <div class="saulo-card-number">#${stickerNumber} • ${escapeHtml(editionText)}</div>
       </div>
 
       <div class="sticker-caption-block">
@@ -743,6 +734,7 @@ function buildStickerCard(vendor, index, options = {}) {
     </article>
   `;
 }
+
 
 
 function buildAlbumMiniCard(vendor, index) {
@@ -768,69 +760,61 @@ function buildAlbumMiniCard(vendor, index) {
 
 function buildAlbumSpread() {
   const vendors = vendorsArray({ albumOnly: true });
-  const greens = vendors.filter((vendor) => vendor.team === "verde");
-  const blues = vendors.filter((vendor) => vendor.team === "azul");
+  const brasil = vendors.filter((vendor) => vendor.team === "verde");
+  const franca = vendors.filter((vendor) => vendor.team === "azul");
   const summary = getCollectionSummary();
   const leaderText = summary.leaderTeam ? teamName(summary.leaderTeam) : "Empate no momento";
   const topSeller = summary.topSeller;
-
   const cardIndex = (vendor) => vendors.findIndex((v) => v.id === vendor.id);
 
-  const greenCards = greens.map((vendor) => `
-    <div class="album-sticker-slot">${buildStickerCard(vendor, cardIndex(vendor), { compact: true })}</div>
-  `).join("");
-
-  const blueCards = blues.map((vendor) => `
-    <div class="album-sticker-slot">${buildStickerCard(vendor, cardIndex(vendor), { compact: true })}</div>
-  `).join("");
+  const brasilCards = brasil.map((vendor) => `<div class="album-sticker-slot">${buildStickerCard(vendor, cardIndex(vendor), { compact: true })}</div>`).join("");
+  const francaCards = franca.map((vendor) => `<div class="album-sticker-slot">${buildStickerCard(vendor, cardIndex(vendor), { compact: true })}</div>`).join("");
 
   return `
-    <div class="album-spread-book premium-album-book exact-album-book">
-      <section class="album-page page-left">
-        <div class="album-page-top">
+    <div class="album-spread-book premium-album-book exact-album-book refined-book">
+      <section class="album-page page-left refined-page brasil-side">
+        <div class="album-page-top refined-top">
           <div class="album-logo-badge">🏆</div>
           <div>
-            <p class="album-mini-label">Álbum da</p>
+            <p class="album-mini-label">Álbum oficial</p>
             <h3>Copa das Vendas</h3>
-            <p class="album-description">Figurinhas oficiais da campanha interna da loja.</p>
+            <p class="album-description">Coleção completa da campanha interna com os 5 vendedores ativos.</p>
           </div>
         </div>
-
         <div class="album-team-title verde">${escapeHtml(teamName("verde"))}</div>
-        <div class="album-card-row premium-album-grid exact-album-grid">${greenCards || "<p class='muted'>Nenhuma figurinha verde publicada.</p>"}</div>
-
+        <div class="album-card-row premium-album-grid exact-album-grid three-up">${brasilCards || "<p class='muted'>Nenhuma figurinha do Brasil publicada.</p>"}</div>
         <div class="album-special-strip green">
           <div class="album-special-copy">
-            <span>Artilheiro do mês</span>
+            <span>Artilheiro da campanha</span>
             <strong>${escapeHtml(topSeller?.shortName || topSeller?.name || "A definir")}</strong>
-            <small>Maior faturamento acumulado da campanha.</small>
+            <small>Maior faturamento individual acumulado.</small>
           </div>
           <div class="album-special-icon">⚽</div>
-          <div class="album-special-slot">01</div>
+          <div class="album-special-slot">5</div>
         </div>
       </section>
 
-      <section class="album-page page-right">
-        <div class="album-page-header-inline">
-          <span>Corrida das dezenas</span>
+      <section class="album-page page-right refined-page franca-side">
+        <div class="album-page-header-inline refined-inline">
+          <span>Disputa principal</span>
           <strong>${escapeHtml(teamName("azul"))}</strong>
         </div>
-
-        <div class="album-card-row premium-album-grid exact-album-grid">${blueCards || "<p class='muted'>Nenhuma figurinha azul publicada.</p>"}</div>
-
+        <div class="album-card-row premium-album-grid exact-album-grid two-up">${francaCards || "<p class='muted'>Nenhuma figurinha da França publicada.</p>"}</div>
         <div class="album-special-strip blue">
           <div class="album-special-copy">
-            <span>Equipe em destaque</span>
+            <span>Líder atual da corrida</span>
             <strong>${escapeHtml(leaderText)}</strong>
-            <small>Critério: gols e faturamento acumulado.</small>
+            <small>Critério: gols primeiro, faturamento depois.</small>
           </div>
-          <div class="album-special-icon">🏆</div>
-          <div class="album-special-slot">01</div>
+          <div class="album-special-icon">🏅</div>
+          <div class="album-special-slot">${vendors.length}</div>
         </div>
+        <div class="album-foot-note">Todas as telas e páginas exibem os 5 vendedores cadastrados na campanha.</div>
       </section>
     </div>
   `;
 }
+
 
 function buildEmptyAlbumSlot(number, team, label = "Reserva") {
   return `
@@ -1339,7 +1323,7 @@ function bindPhotoButtons() {
     button.addEventListener("click", async () => {
       const card = button.closest(".sticker-premium")?.querySelector(".sticker-premium-frame");
       const vendor = getVendor(button.dataset.downloadSticker);
-      await downloadElementAsImage(card, `figurinha-${vendor?.shortName || vendor?.name || "vendedor"}.png`, 3);
+      await downloadElementAsImage(card, `figurinha-${vendor?.shortName || vendor?.name || "vendedor"}.png`, 5);
     });
   });
 }
@@ -1375,7 +1359,7 @@ function renderRules() {
     ["Campanha", state.data.settings?.name || campaign.name],
     ["Loja", state.data.settings?.store || campaign.store],
     ["Período", `${state.data.settings?.startDate || campaign.startDate} a ${state.data.settings?.endDate || campaign.endDate}`],
-    ["Formato", "Disputa por duplas / times internos: Time Verde x Time Azul."],
+    ["Formato", `Disputa por duplas / seleções internas: ${teamName("verde")} x ${teamName("azul")}.`],
     ["Controle", "Somente o gerente cadastra, edita figurinhas, envia fotos e lança vendas. Rodadas, gols e bônus são calculados automaticamente pelo sistema."],
     ["Acesso vendedor", "Vendedor apenas acompanha placar, ranking, vendas, álbum e figurinhas. Não altera dados."],
     ["Produtos", state.data.settings?.productsRule || "Todos os produtos da loja contam."],
@@ -1715,8 +1699,8 @@ async function exportReportPDF() {
   line("Campanha", state.data.settings?.name);
   line("Loja", state.data.settings?.store);
   line("Período", `${state.data.settings?.startDate} a ${state.data.settings?.endDate}`);
-  line("Time Verde", `${score.verde.goals} gols — ${brl(score.verde.sales)} em vendas`);
-  line("Time Azul", `${score.azul.goals} gols — ${brl(score.azul.sales)} em vendas`);
+  line(teamName("verde"), `${score.verde.goals} gols — ${brl(score.verde.sales)} em vendas`);
+  line(teamName("azul"), `${score.azul.goals} gols — ${brl(score.azul.sales)} em vendas`);
   line("Líder", summary.leaderTeam ? teamName(summary.leaderTeam) : "Empate");
   line("Artilheiro", ranking[0] ? `${ranking[0].name} — ${brl(ranking[0].total)}` : "A definir");
   line("Figurinhas", `${summary.withPhotos}/${summary.total} com foto`);

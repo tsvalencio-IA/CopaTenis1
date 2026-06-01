@@ -3785,3 +3785,433 @@ nav {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ========================================================================== 
+   REFINO FINAL — FIGURINHAS + ÁLBUM PREMIUM BRASIL X FRANÇA
+   Sem simplificar lógica.
+   ========================================================================== */
+
+.soccer-premium-card {
+  width: min(100%, 430px);
+}
+
+.soccer-premium-frame {
+  position: relative;
+  aspect-ratio: 0.73;
+  border-radius: 34px;
+  overflow: hidden;
+  padding: 0;
+  border: 12px solid #ede6cb;
+  background:
+    linear-gradient(90deg, rgba(12,113,59,.96) 0 34%, rgba(24,124,56,.96) 34% 36%, rgba(234,212,38,.92) 36% 70%, rgba(18,94,143,.96) 70% 100%),
+    linear-gradient(180deg, #0f2a58 0%, #0e4c86 40%, #0a6b4e 100%);
+  box-shadow: 0 26px 70px rgba(0,0,0,.22), inset 0 0 0 4px rgba(255,255,255,.55), inset 0 0 0 8px rgba(214,176,59,.95);
+}
+
+.soccer-holo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,.24) 0 12%, transparent 12% 28%, rgba(255,255,255,.12) 28% 30%, transparent 30% 48%, rgba(255,225,125,.18) 48% 54%, transparent 54% 68%, rgba(98,226,255,.15) 68% 73%, transparent 73% 100%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.11) 0 12px, rgba(255,255,255,0) 12px 24px);
+  mix-blend-mode: screen;
+  opacity: .48;
+}
+
+.soccer-card-edge {
+  position: absolute;
+  inset: 18px;
+  border-radius: 28px;
+  border: 4px solid rgba(255,255,255,.88);
+  box-shadow: inset 0 0 0 3px rgba(214,176,59,.95);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.soccer-crowd {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255,232,117,.32) 0 8%, transparent 9%),
+    radial-gradient(circle at 28% 18%, rgba(18,169,80,.28) 0 6%, transparent 7%),
+    radial-gradient(circle at 52% 12%, rgba(255,224,91,.28) 0 9%, transparent 10%),
+    radial-gradient(circle at 77% 14%, rgba(18,169,80,.26) 0 8%, transparent 9%),
+    radial-gradient(circle at 84% 22%, rgba(255,224,91,.26) 0 8%, transparent 9%),
+    linear-gradient(180deg, rgba(6,28,68,.34) 0%, rgba(8,94,152,.12) 42%, rgba(7,98,60,.16) 100%);
+  filter: blur(4px);
+}
+
+.soccer-event-badge {
+  position: absolute;
+  left: 22px;
+  top: 24px;
+  z-index: 12;
+  width: 106px;
+  min-height: 132px;
+  border-radius: 24px 0 24px 0;
+  background: linear-gradient(180deg, #071a4f 0%, #0a276a 100%);
+  color: #fff;
+  border-right: 4px solid rgba(214,176,59,.98);
+  border-bottom: 4px solid rgba(214,176,59,.98);
+  display: grid;
+  place-items: center;
+  padding: 12px 8px;
+  text-align: center;
+  box-shadow: 0 14px 28px rgba(0,0,0,.22);
+}
+
+.soccer-event-mark { font-size: 30px; line-height: 1; color: #fff; }
+.soccer-event-copy { font-size: 12px; line-height: 1.02; font-weight: 900; letter-spacing: .02em; }
+
+.soccer-team-badge {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 28px;
+  z-index: 14;
+  width: 170px;
+  height: 96px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.92);
+  border: 4px solid rgba(214,176,59,.98);
+  box-shadow: 0 12px 24px rgba(0,0,0,.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.soccer-team-badge-shape {
+  width: 92px;
+  height: 44px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  background: #1a9d50;
+}
+
+.soccer-team-badge.verde .soccer-team-badge-shape::before,
+.soccer-team-badge.azul .soccer-team-badge-shape::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.soccer-team-badge.verde .soccer-team-badge-shape::before {
+  background:
+    linear-gradient(45deg, transparent 30%, #efd12e 31% 69%, transparent 70%),
+    linear-gradient(-45deg, transparent 30%, #efd12e 31% 69%, transparent 70%),
+    radial-gradient(circle at center, #2149ab 0 18%, transparent 19%);
+}
+
+.soccer-team-badge.azul .soccer-team-badge-shape {
+  background:
+    linear-gradient(180deg, #2246a5 0 33%, #ffffff 33% 66%, #d84242 66% 100%);
+}
+
+.soccer-team-badge small {
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: .08em;
+  color: #14305c;
+  text-transform: uppercase;
+}
+
+.soccer-team-watermark {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 168px;
+  z-index: 8;
+  color: rgba(255,255,255,.92);
+  font-size: clamp(34px, 6vw, 64px);
+  font-weight: 1000;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-shadow: 0 6px 20px rgba(0,0,0,.26);
+  text-align: center;
+  width: calc(100% - 90px);
+}
+
+.soccer-photo-shell {
+  position: absolute;
+  inset: 88px 26px 138px 26px;
+  z-index: 6;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.soccer-photo-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255,255,255,.18) 0 16%, transparent 17%),
+    linear-gradient(180deg, rgba(20,44,84,.26), rgba(16,112,78,.08)),
+    radial-gradient(circle at 50% 104%, rgba(12,119,66,.9) 0 16%, transparent 26%);
+}
+
+.soccer-photo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.soccer-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: contrast(1.03) saturate(1.06) brightness(1.04);
+}
+
+.premium-card-photo-placeholder {
+  width: 100%; height: 100%; display: grid; place-items: center;
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.05));
+  color: rgba(255,255,255,.92); font-size: 58px;
+}
+
+.soccer-side-stats {
+  position: absolute;
+  left: 22px;
+  top: 184px;
+  z-index: 15;
+  width: 160px;
+  display: grid;
+  gap: 12px;
+}
+
+.soccer-side-stat {
+  background: rgba(4,20,60,.96);
+  border: 3px solid rgba(214,176,59,.98);
+  color: #fff;
+  border-radius: 0 20px 20px 0;
+  padding: 12px 14px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.20);
+}
+
+.soccer-side-stat small {
+  display: block;
+  color: #ffe25f;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.soccer-side-stat strong {
+  display: block;
+  margin-top: 6px;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 1000;
+  line-height: 1.02;
+}
+
+.soccer-center-badge {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 338px;
+  z-index: 16;
+  width: 88px;
+  height: 88px;
+  border-radius: 26px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.86);
+  color: #1b9d55;
+  border: 3px solid rgba(255,255,255,.95);
+  box-shadow: 0 16px 28px rgba(0,0,0,.16);
+  font-size: 34px;
+  font-weight: 1000;
+}
+
+.soccer-bottom-panel {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+  z-index: 18;
+}
+
+.soccer-bottom-top {
+  display: grid;
+  grid-template-columns: 92px 1fr 92px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.soccer-emblem {
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #0a2b67, #081f49);
+  border: 4px solid rgba(214,176,59,.98);
+  color: #fff;
+  font-size: 42px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.18);
+}
+
+.soccer-name-box {
+  background: linear-gradient(180deg, #0a2b67, #081f49);
+  border: 4px solid rgba(214,176,59,.98);
+  border-radius: 20px;
+  min-height: 92px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.soccer-name {
+  color: #fff;
+  text-align: center;
+  font-size: clamp(34px, 6.2vw, 58px);
+  font-weight: 1000;
+  line-height: .95;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-shadow: 0 4px 10px rgba(0,0,0,.30);
+}
+
+.soccer-role-bar {
+  margin-top: 0;
+  background: linear-gradient(180deg, #0c7b48, #07512f);
+  border: 4px solid rgba(214,176,59,.98);
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+  text-align: center;
+  color: #fff;
+  padding: 10px 12px;
+  font-size: clamp(15px, 2.4vw, 24px);
+  font-weight: 1000;
+  letter-spacing: .12em;
+}
+
+.soccer-card-code {
+  margin-top: 10px;
+  text-align: center;
+  color: rgba(255,255,255,.92);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-shadow: 0 2px 8px rgba(0,0,0,.32);
+}
+
+.sticker-premium.compact.soccer-premium-card { width: 100%; max-width: 260px; }
+.sticker-premium.compact .soccer-premium-frame { border-width: 8px; border-radius: 24px; }
+.sticker-premium.compact .soccer-card-edge { inset: 10px; border-width: 2px; border-radius: 16px; }
+.sticker-premium.compact .soccer-event-badge { left: 12px; top: 13px; width: 58px; min-height: 78px; border-radius: 14px 0 14px 0; border-right-width: 2px; border-bottom-width: 2px; padding: 8px 4px; }
+.sticker-premium.compact .soccer-event-mark { font-size: 18px; }
+.sticker-premium.compact .soccer-event-copy { font-size: 7px; }
+.sticker-premium.compact .soccer-team-badge { top: 14px; width: 104px; height: 60px; border-radius: 16px; border-width: 2px; gap: 1px; }
+.sticker-premium.compact .soccer-team-badge-shape { width: 58px; height: 26px; border-radius: 6px; }
+.sticker-premium.compact .soccer-team-badge small { font-size: 8px; }
+.sticker-premium.compact .soccer-team-watermark { top: 98px; font-size: 21px; width: calc(100% - 56px); }
+.sticker-premium.compact .soccer-photo-shell { inset: 56px 12px 88px 12px; border-radius: 14px; }
+.sticker-premium.compact .soccer-side-stats { left: 12px; top: 112px; width: 80px; gap: 6px; }
+.sticker-premium.compact .soccer-side-stat { padding: 6px 8px; border-width: 2px; border-radius: 0 10px 10px 0; }
+.sticker-premium.compact .soccer-side-stat small { font-size: 7px; }
+.sticker-premium.compact .soccer-side-stat strong { margin-top: 2px; font-size: 14px; }
+.sticker-premium.compact .soccer-center-badge { top: 200px; width: 48px; height: 48px; border-radius: 14px; font-size: 18px; border-width: 2px; }
+.sticker-premium.compact .soccer-bottom-panel { left: 12px; right: 12px; bottom: 10px; }
+.sticker-premium.compact .soccer-bottom-top { grid-template-columns: 48px 1fr 48px; gap: 6px; }
+.sticker-premium.compact .soccer-emblem { border-width: 2px; border-radius: 12px; font-size: 20px; }
+.sticker-premium.compact .soccer-name-box { border-width: 2px; border-radius: 12px; min-height: 50px; padding: 4px 8px; }
+.sticker-premium.compact .soccer-name { font-size: 18px; }
+.sticker-premium.compact .soccer-role-bar { padding: 5px 6px; border-width: 2px; font-size: 8px; border-radius: 0 0 10px 10px; }
+.sticker-premium.compact .soccer-card-code { margin-top: 4px; font-size: 7px; }
+
+/* álbum */
+.refined-book {
+  background: #efe7c9;
+  border: 2px solid rgba(144,118,57,.26);
+  box-shadow: 0 30px 70px rgba(0,0,0,.14);
+}
+
+.refined-page {
+  min-height: 1020px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.52), transparent 30%),
+    linear-gradient(180deg, #f8f2df, #efe4c7);
+}
+
+.refined-top h3 { color: #13442f; }
+.refined-inline strong { color: #143f91; }
+.album-card-row.three-up,
+.album-card-row.two-up {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+.album-card-row.three-up .album-sticker-slot:last-child:first-child,
+.album-card-row.three-up .album-sticker-slot:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+.album-sticker-slot {
+  display: flex;
+  justify-content: center;
+}
+.album-team-title.verde { color: #0b7f49; }
+.refined-page.franca-side .album-page-header-inline strong { color: #1c4298; }
+.album-special-strip {
+  margin-top: 18px;
+  border-radius: 22px;
+  padding: 16px 18px;
+  border: 2px solid rgba(214,176,59,.42);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.52);
+}
+.album-foot-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #5c513a;
+  text-align: center;
+  font-weight: 700;
+}
+
+@media (max-width: 980px) {
+  .soccer-premium-card { width: min(100%, 390px); }
+  .soccer-team-watermark { top: 150px; }
+  .soccer-side-stats { width: 146px; }
+}
+
+@media (max-width: 860px) {
+  .refined-book { grid-template-columns: 1fr; }
+  .refined-page { min-height: auto; }
+  .page-left { border-right: 0; border-bottom: 2px solid rgba(68,52,34,.14); }
+}
+
+@media (max-width: 720px) {
+  .soccer-premium-card { width: min(100%, 350px); }
+  .soccer-event-badge { width: 74px; min-height: 92px; left: 16px; top: 16px; padding: 8px 4px; }
+  .soccer-event-mark { font-size: 22px; }
+  .soccer-event-copy { font-size: 9px; }
+  .soccer-team-badge { width: 118px; height: 72px; top: 18px; }
+  .soccer-team-badge-shape { width: 66px; height: 30px; }
+  .soccer-team-badge small { font-size: 10px; }
+  .soccer-team-watermark { top: 112px; font-size: 26px; width: calc(100% - 44px); }
+  .soccer-photo-shell { inset: 62px 14px 112px 14px; }
+  .soccer-side-stats { left: 14px; top: 132px; width: 98px; gap: 8px; }
+  .soccer-side-stat { padding: 8px 8px; border-width: 2px; }
+  .soccer-side-stat small { font-size: 8px; }
+  .soccer-side-stat strong { font-size: 17px; }
+  .soccer-center-badge { top: 240px; width: 56px; height: 56px; font-size: 20px; }
+  .soccer-bottom-panel { left: 12px; right: 12px; bottom: 10px; }
+  .soccer-bottom-top { grid-template-columns: 58px 1fr 58px; gap: 8px; }
+  .soccer-emblem { font-size: 26px; border-width: 2px; border-radius: 14px; }
+  .soccer-name-box { min-height: 58px; padding: 6px 10px; border-width: 2px; border-radius: 14px; }
+  .soccer-name { font-size: clamp(22px, 8vw, 34px); }
+  .soccer-role-bar { padding: 6px 8px; border-width: 2px; font-size: 11px; border-radius: 0 0 12px 12px; }
+  .soccer-card-code { font-size: 9px; margin-top: 5px; }
+  .album-card-row.three-up,
+  .album-card-row.two-up { grid-template-columns: 1fr; }
+}
