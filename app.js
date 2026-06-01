@@ -774,23 +774,30 @@ function buildAlbumSpread() {
   const leaderText = summary.leaderTeam ? teamName(summary.leaderTeam) : "Empate no momento";
   const topSeller = summary.topSeller;
 
-  const greenCards = greens.map((vendor) => buildAlbumMiniCard(vendor, vendors.findIndex((v) => v.id === vendor.id))).join("");
-  const blueCards = blues.map((vendor) => buildAlbumMiniCard(vendor, vendors.findIndex((v) => v.id === vendor.id))).join("");
+  const cardIndex = (vendor) => vendors.findIndex((v) => v.id === vendor.id);
+
+  const greenCards = greens.map((vendor) => `
+    <div class="album-sticker-slot">${buildStickerCard(vendor, cardIndex(vendor), { compact: true })}</div>
+  `).join("");
+
+  const blueCards = blues.map((vendor) => `
+    <div class="album-sticker-slot">${buildStickerCard(vendor, cardIndex(vendor), { compact: true })}</div>
+  `).join("");
 
   return `
-    <div class="album-spread-book premium-album-book">
+    <div class="album-spread-book premium-album-book exact-album-book">
       <section class="album-page page-left">
         <div class="album-page-top">
           <div class="album-logo-badge">🏆</div>
           <div>
             <p class="album-mini-label">Álbum da</p>
             <h3>Copa das Vendas</h3>
-            <p class="album-description">Coleção oficial da campanha com os vendedores publicados no sistema.</p>
+            <p class="album-description">Figurinhas oficiais da campanha interna da loja.</p>
           </div>
         </div>
 
-        <div class="album-team-title verde">${escapeHtml(teamName('verde'))}</div>
-        <div class="album-card-row premium-album-grid">${greenCards || "<p class='muted'>Nenhuma figurinha verde publicada.</p>"}</div>
+        <div class="album-team-title verde">${escapeHtml(teamName("verde"))}</div>
+        <div class="album-card-row premium-album-grid exact-album-grid">${greenCards || "<p class='muted'>Nenhuma figurinha verde publicada.</p>"}</div>
 
         <div class="album-special-strip green">
           <div class="album-special-copy">
@@ -806,10 +813,10 @@ function buildAlbumSpread() {
       <section class="album-page page-right">
         <div class="album-page-header-inline">
           <span>Corrida das dezenas</span>
-          <strong>${escapeHtml(teamName('azul'))}</strong>
+          <strong>${escapeHtml(teamName("azul"))}</strong>
         </div>
 
-        <div class="album-card-row premium-album-grid">${blueCards || "<p class='muted'>Nenhuma figurinha azul publicada.</p>"}</div>
+        <div class="album-card-row premium-album-grid exact-album-grid">${blueCards || "<p class='muted'>Nenhuma figurinha azul publicada.</p>"}</div>
 
         <div class="album-special-strip blue">
           <div class="album-special-copy">
@@ -900,14 +907,19 @@ function buildBoardVendorSlot(vendor, slotNumber) {
 
 function buildBoardRoster(teamId) {
   const vendors = vendorsArray({ activeOnly: true }).filter((vendor) => vendor.team === teamId);
-  const mainSlots = [vendors[0] || null, vendors[1] || null];
-  const extras = vendors.slice(2);
+
+  if (!vendors.length) {
+    return `
+      <div class="race-roster-grid">
+        ${buildBoardVendorSlot(null, 1)}
+      </div>
+    `;
+  }
 
   return `
-    <div class="race-roster-grid">
-      ${mainSlots.map((vendor, index) => buildBoardVendorSlot(vendor, index + 1)).join('')}
+    <div class="race-roster-grid dynamic-roster count-${vendors.length}">
+      ${vendors.map((vendor, index) => buildBoardVendorSlot(vendor, index + 1)).join("")}
     </div>
-    ${extras.length ? `<div class="race-team-extras">Reserva(s): ${extras.map((vendor) => escapeHtml(vendor.shortName || vendor.name)).join(' • ')}</div>` : ''}
   `;
 }
 
