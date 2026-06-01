@@ -674,8 +674,8 @@ function buildStickerCard(vendor, index, options = {}) {
   const editionText = `${teamLabel} • ${rarity.label}`;
 
   return `
-    <article class="sticker-premium soccer-premium-card ${team} rarity-${rarity.key} ${compact ? "compact" : ""}" data-sticker-vendor="${escapeHtml(vendor.id)}">
-      <div class="sticker-premium-frame soccer-premium-frame">
+    <article class="sticker-premium saulo-sticker ${team} rarity-${rarity.key} " data-sticker-vendor="${escapeHtml(vendor.id)}">
+      <div class="sticker-premium-frame saulo-sticker-frame">
         <div class="soccer-holo"></div>
         <div class="soccer-card-edge"></div>
         <div class="soccer-crowd"></div>

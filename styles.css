@@ -4215,3 +4215,43 @@ nav {
   .album-card-row.three-up,
   .album-card-row.two-up { grid-template-columns: 1fr; }
 }
+
+
+
+/* ==== DEFINITIVO BRASIL X FRANÇA ==== */
+
+/* Proporção correta da figurinha */
+.saulo-sticker-frame {
+  aspect-ratio: 4 / 5.25 !important;
+}
+
+/* Grid responsivo definitivo do álbum */
+.premium-album-grid {
+  display: grid !important;
+  gap: 20px !important;
+}
+
+@media (min-width: 1200px) {
+  .premium-album-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .premium-album-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .premium-album-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Eliminar qualquer efeito de compactação */
+.sticker-premium.compact {
+  transform: none !important;
+  scale: 1 !important;
+}
+
